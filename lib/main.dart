@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project_test_app/bloc/weather_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/first_screen.dart'; // Import the FirstScreen
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:project_test_app/services/weather_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   // await dotenv.load(fileName: ".env");
@@ -11,14 +14,19 @@ Future<void> main() async {
   //   anonKey: dotenv.env['SUPABASE_ANON_KEY']!, // Access the Supabase anon key
   // );
 
-  runApp(MyApp());
+runApp(
+    BlocProvider(
+      create: (context) => WeatherBloc(WeatherRepository()),
+      child: MyApp(),
+    ),
+  );
 }
 
 // Get a reference your Supabase client
 // final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final WeatherRepository repository = WeatherRepository();
 
   @override
   Widget build(BuildContext context) {

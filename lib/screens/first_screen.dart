@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_test_app/bloc/weather_bloc.dart';
+import 'package:project_test_app/screens/weather_screen.dart';
 import 'second_screen.dart';
 import 'Login.dart';
 import 'Register.dart';
@@ -117,6 +120,19 @@ class _MyWidgetState extends State<FirstScreen> {
                   );
                 },
                 child: const Text('Go to Register Screen'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to WeatherPage without wrapping it with BlocProvider
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WeatherPage(),
+                    ),
+                  );
+                },
+                child: const Text('Go to Weather Screen'),
               ),
             ],
           ),
